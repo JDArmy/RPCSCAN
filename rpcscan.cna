@@ -1,0 +1,60 @@
+$uuid = @();
+$uuid[0] = "ac109027-2eb9-4d3e-ab82-d2f8da000d5d";
+$uuid[1] = "650a7e26-eab8-5533-ce43-9c1dfce11511";
+$uuid[2] = "0d3c7f20-1c8d-4654-a1b3-51563b298bda";
+
+$process = @();
+$process[0] = "360.exe";
+$process[1] = "vpn api";
+$process[2] = "UserMgrCli";
+
+alias rpcscan {
+    if (-is64 $1) {
+        ($cmd, $host, $threadnum) = split(' ', $0);
+        # println($0);
+        # println($host);
+        # println($threadnum);
+
+        $bufstr = "";
+        if ($threadnum == ""){
+            $threadnum = 5;
+        }
+
+        foreach $index => $value ($uuid)
+        {
+            $p = $process[$index];
+            $u = $value;
+            $paddingp = chr(0x00) x (40 - strlen($p));
+            $pathcu = chr(0x00) x (40 - strlen($u));
+            $bufstr = "$bufstr$p$paddingp$u$pathcu";
+        }
+        
+        $hostpadding = chr(0x00) x (20 - strlen($host));
+        $host = "$host$hostpadding";
+        
+        $buffer = allocate(1024);
+
+        writeb($buffer, $host);
+
+        writeb($buffer, pack("i-", 135));
+
+        writeb($buffer, pack("i-", $index + 1));
+
+        writeb($buffer, pack("i-", $threadnum));
+
+        writeb($buffer, $bufstr);
+
+        closef($buffer);
+        $b = readb($buffer, -1);
+
+        bdllspawn($1, script_resource("rpcsan.dll"), "$[1024]b", "rpcsan.dll", 5000, false);
+    }else{
+        println("\c4[-]\c0 rpcscan: x64 system support");
+    }
+}
+
+
+beacon_command_register(
+   "rpcscan", 
+   "rpc info scan and get process", 
+   "Use: rpcscan [ips] [thread num]\n\nrpc info scan and get process");
