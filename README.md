@@ -17,9 +17,9 @@ rpc info scan and get process
 
 扫描单ip：`rpcscan 172.16.178.5`
 
-![image-20220304130326063](/Users/windows7/Documents/README/image-20220304130326063.png)
+![image-20220304130326063](./README/image-20220304130326063.png)
 
 100线程扫描172.16.178.5的C段：`rpcscan 172.16.178.5/24 100`
 
-![image-20220304130302359](/Users/windows7/Documents/README/image-20220304130302359.png)
+![image-20220304130302359](./README/image-20220304130302359.png)
 
