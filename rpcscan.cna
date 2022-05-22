@@ -47,7 +47,7 @@ alias rpcscan {
         closef($buffer);
         $b = readb($buffer, -1);
 
-        bdllspawn($1, script_resource("rpcsan.dll"), "$[1024]b", "rpcsan.dll", 5000, false);
+        bdllspawn($1, script_resource("rpcscan.dll"), "$[1024]b", "rpcscan.dll", 5000, false);
     }else{
         println("\c4[-]\c0 rpcscan: x64 system support");
     }
