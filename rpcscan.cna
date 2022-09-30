@@ -3,12 +3,14 @@ $uuid[0] = "ac109027-2eb9-4d3e-ab82-d2f8da000d5d";
 $uuid[1] = "650a7e26-eab8-5533-ce43-9c1dfce11511";
 $uuid[2] = "0d3c7f20-1c8d-4654-a1b3-51563b298bda";
 $uuid[3] = "12345678-1234-ABCD-EF00-0123456789AB";
+$uuid[4] = "74103b90-29af-413f-b203-a3eb4f7e95b8";
 
 $process = @();
 $process[0] = "360.exe";
 $process[1] = "vpn api";
 $process[2] = "UserMgrCli";
 $process[3] = "Spoolsv";
+$process[4] = "Avast/AVG";
 
 alias rpcscan {
     if (-is64 $1) {
